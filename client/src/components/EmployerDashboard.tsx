@@ -48,7 +48,6 @@ export default function EmployerDashboard() {
     setVault(v ? v as unknown as VaultAccount : null);
     if (!v) { setRecipients([]); return; }
 
-    // Fetch all recipient accounts for this vault from chain
     const accounts = await connection.getProgramAccounts(PROGRAM_ID, {
       filters: [
         { dataSize: 189 },
@@ -59,7 +58,7 @@ export default function EmployerDashboard() {
     const parsed: RecipientAccount[] = accounts.flatMap(({ pubkey, account }) => {
       const d = account.data;
       let o = 8;
-      const vault = new PublicKey(d.slice(o, o + 32)); o += 32; // eslint-disable-line
+      o += 32;
       const workerWallet = new PublicKey(d.slice(o, o + 32)); o += 32;
       const amountPerDisbursement = new BN(d.slice(o, o + 8), 'le'); o += 8;
       const kycVerified = d[o] === 1; o += 1;
@@ -67,7 +66,7 @@ export default function EmployerDashboard() {
       const isBlacklisted = d[o] === 1; o += 1;
       const totalReceived = new BN(d.slice(o, o + 8), 'le'); o += 8;
       const disbursementCount = d.readUInt32LE(o); o += 4;
-      const lastDisbursedAt = new BN(d.slice(o, o + 8), 'le'); o += 8; // eslint-disable-line
+      o += 8;
       const snLen = d.readUInt32LE(o); o += 4;
       const senderName = d.slice(o, o + snLen).toString('utf8'); o += snLen;
       const rnLen = d.readUInt32LE(o); o += 4;
