@@ -1,0 +1,325 @@
+Streaming transaction logs mentioning AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF. Confirmed commitment
+Transaction executed in slot 528:
+  Signature: 2MxnbMk1U3bnADvULzVVrQzpK7NA6G96tLidKoCDYGh7qwBwbw7iFdHmd4dEpnZu5qbbFg9xzyX1NEuV5RvCgR8e
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: InitializeVault
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [2]
+    Program log: Create
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]
+    Program log: Instruction: GetAccountDataSize
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 1595 of 174940 compute units
+    Program return: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA pQAAAAAAAAA=
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program 11111111111111111111111111111111 invoke [3]
+    Program 11111111111111111111111111111111 success
+    Program log: Initialize the associated token account
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]
+    Program log: Instruction: InitializeImmutableOwner
+    Program log: Please upgrade to SPL Token 2022 for immutable owner support
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 1405 of 168435 compute units
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]
+    Program log: Instruction: InitializeAccount3
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4214 of 164604 compute units
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 20275 of 180361 compute units
+    Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success
+    Program log: PayFlow vault 'Acme Kenya Payroll' initialized by employer 2pLg16syDDwdtoh126KvrNLBtspU4pRSy18i3cyoo4D5
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 52737 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 529:
+  Signature: 2kg5EGMSn6JPzXSKhjgs475Hfpr5djvnb3BQ53Tz7mQ2HXs5sSWnkL83LPSL7mRaTDPRAHex9ejfU8TGVtqaiPCy
+  Status: Error processing Instruction 0: custom program error: 0x1776
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: InitializeVault
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [2]
+    Program log: Create
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]
+    Program log: Instruction: GetAccountDataSize
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 1595 of 171870 compute units
+    Program return: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA pQAAAAAAAAA=
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program 11111111111111111111111111111111 invoke [3]
+    Program 11111111111111111111111111111111 success
+    Program log: Initialize the associated token account
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]
+    Program log: Instruction: InitializeImmutableOwner
+    Program log: Please upgrade to SPL Token 2022 for immutable owner support
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 1405 of 165365 compute units
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]
+    Program log: Instruction: InitializeAccount3
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4214 of 161534 compute units
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 24775 of 181791 compute units
+    Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success
+    Program log: AnchorError thrown in src/instructions/initialize_vault.rs:10. Error Code: VaultNameTooLong. Error Number: 6006. Error Message: Vault name exceeds the maximum allowed length (50 chars)..
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 46107 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF failed: custom program error: 0x1776
+Transaction executed in slot 530:
+  Signature: ehuWK5WSjxG57Dzv6W85wtp4VVDoiRML7jkSpzYkwcSGiBbZ6j8SjkUFMbcWVyyq3iaosmASUTXj777ojYywEiZ
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: Deposit
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]
+    Program log: Instruction: Transfer
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4645 of 192588 compute units
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program log: Deposited 3000000000 USDC (raw) into vault 'Acme Kenya Payroll'. Lifetime deposits: 3000000000
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 13894 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 530:
+  Signature: JxFsvJNT25LfvVA3RKyjDh2PJoU229khKm9MFUgNNFR1J1VLvPiX9zUizUGDQkH7fqCViUtzntVkAY3Y6UqToXJ
+  Status: Error processing Instruction 0: custom program error: 0x1777
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: Deposit
+    Program log: AnchorError thrown in src/instructions/deposit.rs:9. Error Code: InvalidDisbursementAmount. Error Number: 6007. Error Message: Disbursement amount must be greater than zero..
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 7360 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF failed: custom program error: 0x1777
+Transaction executed in slot 531:
+  Signature: 4pkCHpuy6oYfpddcKgreQLWsjZCDGYkV9avjQmhZ7hc8Bpdtce5uvRTx5H4iwVn7wFK7WsikSQFJWX3E5FHDLqh6
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: AddRecipient
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program log: Recipient EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV added to vault 'Acme Kenya Payroll'. KYC pending.
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 35527 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 531:
+  Signature: ZKGu8oBAeSu5nTxzY8vpuDgMP1up2H2XjpzrDGgo5NC6RBapUoUKkpJH5jgoXxPvqwfVMh1TCcDfedXahcKuA1Z
+  Status: Error processing Instruction 0: custom program error: 0x1775
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: AddRecipient
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program log: AnchorError caused by account: vault. Error Code: UnauthorizedComplianceOfficer. Error Number: 6005. Error Message: Only the vault's compliance officer can perform this action..
+    Program log: Left:
+    Program log: EvwBoWKJG8S7JsAGx6cgPYo4ttGDTEW7FaDxX5esM2Qm
+    Program log: Right:
+    Program log: 2pLg16syDDwdtoh126KvrNLBtspU4pRSy18i3cyoo4D5
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 14328 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF failed: custom program error: 0x1775
+Transaction executed in slot 532:
+  Signature: 4Wom4mpHFNLM8kW6T6NHLe7v4DsSYiUa8MDydZmSkFmUsUeBLKv2XAyGb6S9Q6iGJkbc9BQeoUbgga1nSXMWxzmi
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: UpdateKycStatus
+    Program log: KYC status for EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV updated: false → true
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 18676 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 532:
+  Signature: 5Vqz1Jy8igTJd7JU2v6EbL9XbkjA7ogfaoygwqfrPjpc6hXY4PywtvgdA6422X4X1iiWJXqHRhWvB7CnishcMBZP
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: Disburse
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]
+    Program log: Instruction: Transfer
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4645 of 183042 compute units
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program log: Disbursement #0 — 500000000 USDC (raw) → EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV (below Travel Rule threshold)
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 36174 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 533:
+  Signature: 5Vqz1Jy8igTJd7JU2v6EbL9XbkjA7ogfaoygwqfrPjpc6hXY4PywtvgdA6422X4X1iiWJXqHRhWvB7CnishcMBZP
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: Disburse
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]
+    Program log: Instruction: Transfer
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4645 of 183042 compute units
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program log: Disbursement #0 — 500000000 USDC (raw) → EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV (below Travel Rule threshold)
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 36174 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 533:
+  Signature: 57QqmZKB6zDr1Ud3maW5NPnG1ufXHacPM3b9MxGV88WTmMEN5gMr9oGGjaVR25TiQojTeTWjDrvsnFhx8BVjsL7A
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: Disburse
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]
+    Program log: Instruction: Transfer
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4645 of 181542 compute units
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program log: Disbursement #1 — 500000000 USDC (raw) → EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV (below Travel Rule threshold)
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 37678 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 534:
+  Signature: 57QqmZKB6zDr1Ud3maW5NPnG1ufXHacPM3b9MxGV88WTmMEN5gMr9oGGjaVR25TiQojTeTWjDrvsnFhx8BVjsL7A
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: Disburse
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]
+    Program log: Instruction: Transfer
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4645 of 181542 compute units
+    Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success
+    Program log: Disbursement #1 — 500000000 USDC (raw) → EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV (below Travel Rule threshold)
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 37678 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 534:
+  Signature: 46uNoKaAvV1mHn4qu69KvAMMg8mW8KdK96v5rmitXvZY1cpZdWxdwRiDhvouvJmF38oLJL9XuHx9tVfhdFeQ1c1C
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: SetRecipientPause
+    Program log: Recipient EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV is now PAUSED (AML hold)
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 18690 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 535:
+  Signature: 46uNoKaAvV1mHn4qu69KvAMMg8mW8KdK96v5rmitXvZY1cpZdWxdwRiDhvouvJmF38oLJL9XuHx9tVfhdFeQ1c1C
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: SetRecipientPause
+    Program log: Recipient EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV is now PAUSED (AML hold)
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 18690 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 536:
+  Signature: 2Kzxj8qqsaXfjjTaCqyo6T4PLGA8GSQMVdA5Asb7sRQKjdtvzh4cVGkL8xrHCvF9KfqiftLrQYG5f6fKfXmGRTy2
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: SetRecipientPause
+    Program log: Recipient EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV is now UNPAUSED
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 18582 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 536:
+  Signature: 2hAzNKun6MBrF67ecMRXfCXkhWb6wteYi8DHgenrSJfAtw2aJ21iu6tAjfHzH3V4Zge13RRBMpJPK9QCTCqk6PMh
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: BlacklistRecipient
+    Program log: Recipient EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV has been PERMANENTLY BLACKLISTED on vault 2NqMCntiFsi3ucYKRgzwn1frFfedc6bkwk67aHnmJTFW.
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 28730 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 537:
+  Signature: 2hAzNKun6MBrF67ecMRXfCXkhWb6wteYi8DHgenrSJfAtw2aJ21iu6tAjfHzH3V4Zge13RRBMpJPK9QCTCqk6PMh
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: BlacklistRecipient
+    Program log: Recipient EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV has been PERMANENTLY BLACKLISTED on vault 2NqMCntiFsi3ucYKRgzwn1frFfedc6bkwk67aHnmJTFW.
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 28730 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 537:
+  Signature: 2HfP5qkQA5hAHb7NjUiP63HTCFUvJaoxJxbTxphhpexoa46BejYHEzh3C1Mw2F8TKgBbVk82uvrei9phGKtuiHKk
+  Status: Error processing Instruction 0: custom program error: 0x1772
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: Disburse
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program log: AnchorError thrown in src/instructions/disburse.rs:12. Error Code: RecipientBlacklisted. Error Number: 6002. Error Message: Recipient wallet has been permanently blacklisted..
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 20012 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF failed: custom program error: 0x1772
+Transaction executed in slot 537:
+  Signature: 5M6fANTkZFHwXqKEP5TP5YqW2GY8iQSWGo9wrjdwGi2iCQceBGgbqZHNhaQfmBy2o2ygmgFc5dF4vQ8SPis5Wvru
+  Status: Error processing Instruction 0: custom program error: 0x1778
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: UpdateKycStatus
+    Program log: AnchorError thrown in src/instructions/update_kyc_status.rs:9. Error Code: AlreadyBlacklisted. Error Number: 6008. Error Message: Recipient is already blacklisted — cannot modify..
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 8368 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF failed: custom program error: 0x1778
+Transaction executed in slot 537:
+  Signature: 47PKZ7DbtzLSTzJDLQC7J3ZzpD6EybpLGYTZpLyuhm6ZHonxYcK3SzvKAutSb56wgvvtXWsWG3DZ9Aptpd6tttYL
+  Status: Error processing Instruction 0: custom program error: 0x1778
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: BlacklistRecipient
+    Program log: AnchorError thrown in src/instructions/blacklist_recipient.rs:8. Error Code: AlreadyBlacklisted. Error Number: 6008. Error Message: Recipient is already blacklisted — cannot modify..
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 8357 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF failed: custom program error: 0x1778
+Transaction executed in slot 537:
+  Signature: 2AvTybVNihSDfFTXSRtHEZtRZcDSY2DGzmzxZFuPeEg7S7ED1dAbbgSsEQ7GpcZ5wLhuFHfbQEyL5nNZHHVwwqXq
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: RemoveRecipient
+    Program log: Recipient EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV removed from vault 'Acme Kenya Payroll'. Rent returned to compliance officer.
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 18372 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 538:
+  Signature: 2AvTybVNihSDfFTXSRtHEZtRZcDSY2DGzmzxZFuPeEg7S7ED1dAbbgSsEQ7GpcZ5wLhuFHfbQEyL5nNZHHVwwqXq
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: RemoveRecipient
+    Program log: Recipient EKpcB62BziqXdirMtD4C8C6VnRbNGhFakPkcLxTYXLoV removed from vault 'Acme Kenya Payroll'. Rent returned to compliance officer.
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 18372 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 540:
+  Signature: 4WSXagVdK5EyNwgxg9DDsNr3z68gQ4dbN5TKWqcFgb8DFoZN9Uu4JMdrYCUxMp7VMAuqgUrQFJVZ2k5ULr3pS3q5
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: AddRecipient
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program log: Recipient BcNNAu9VgtqZDz4bMMN6aZX7JaGfBP4y7fFG75sin9rT added to vault 'Acme Kenya Payroll'. KYC pending.
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 26501 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 541:
+  Signature: 4WSXagVdK5EyNwgxg9DDsNr3z68gQ4dbN5TKWqcFgb8DFoZN9Uu4JMdrYCUxMp7VMAuqgUrQFJVZ2k5ULr3pS3q5
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: AddRecipient
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program log: Recipient BcNNAu9VgtqZDz4bMMN6aZX7JaGfBP4y7fFG75sin9rT added to vault 'Acme Kenya Payroll'. KYC pending.
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 26501 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 541:
+  Signature: 2vwC5wmqx6wmekWa3ekHQ9nAhHmHUoeNTGAKRjokB6EnXbpHDAmPd7fXVyZ21HAx1XwUEgde6wZKCNXM1fKfZihH
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: UpdateKycStatus
+    Program log: KYC status for BcNNAu9VgtqZDz4bMMN6aZX7JaGfBP4y7fFG75sin9rT updated: false → true
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 18473 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 542:
+  Signature: 2vwC5wmqx6wmekWa3ekHQ9nAhHmHUoeNTGAKRjokB6EnXbpHDAmPd7fXVyZ21HAx1XwUEgde6wZKCNXM1fKfZihH
+  Status: Ok
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: UpdateKycStatus
+    Program log: KYC status for BcNNAu9VgtqZDz4bMMN6aZX7JaGfBP4y7fFG75sin9rT updated: false → true
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 18473 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF success
+Transaction executed in slot 542:
+  Signature: 4eYW9X2sfvZ9xNV6ftF9WZGbkAbSEYdRJrbKyx3ycBQknb6QMnG4E3ybNCBjN73yJ7fGaQUJQbenySoKqasthw37
+  Status: Error processing Instruction 0: custom program error: 0x1773
+  Log Messages:
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF invoke [1]
+    Program log: Instruction: Disburse
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program log: AnchorError thrown in src/instructions/disburse.rs:25. Error Code: InsufficientVaultBalance. Error Number: 6003. Error Message: Vault has insufficient USDC balance for this disbursement..
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF consumed 16917 of 200000 compute units
+    Program AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF failed: custom program error: 0x1773

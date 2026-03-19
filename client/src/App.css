@@ -1,0 +1,405 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.header {
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,8,0.85);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+}
+
+.brand-name {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.brand-name span { color: var(--gold); }
+
+.brand-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+/* ── Tab Nav ── */
+.tab-nav {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 3px;
+  margin: 0 auto;
+}
+
+.tab-btn {
+  padding: 7px 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all var(--transition);
+}
+
+.tab-btn:hover { color: var(--text-primary); background: var(--bg-input); }
+
+.tab-btn.active {
+  background: var(--gold);
+  color: #0a0a08;
+}
+
+/* ── Wallet ── */
+.wallet-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.wallet-badge {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: var(--radius);
+}
+
+/* Wallet adapter button override */
+.wallet-adapter-button {
+  font-family: 'Syne', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  height: 36px !important;
+  padding: 0 16px !important;
+  border-radius: var(--radius-lg) !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  transition: all var(--transition) !important;
+}
+.wallet-adapter-button:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--border-light) !important;
+}
+.wallet-adapter-button-trigger {
+  background: var(--gold) !important;
+  color: #0a0a08 !important;
+  border-color: var(--gold) !important;
+}
+.wallet-adapter-button-trigger:hover {
+  background: var(--gold-bright) !important;
+  border-color: var(--gold-bright) !important;
+}
+
+/* ── Compliance strip ── */
+.compliance-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 32px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.strip-sep { color: var(--border-light); }
+
+/* ── Main ── */
+.main {
+  flex: 1;
+  padding: 32px;
+}
+
+.content {
+  animation: fadeUp 300ms ease both;
+}
+
+/* ── Connect prompt ── */
+.connect-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.connect-glyph {
+  font-size: 48px;
+  color: var(--gold);
+  animation: pulse-gold 2s ease infinite;
+}
+
+.connect-prompt h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.connect-prompt p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* ── Footer ── */
+.footer {
+  padding: 16px 32px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ── Shared card styles ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Form elements ── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.field input, .field select {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color var(--transition);
+  width: 100%;
+}
+
+.field input:focus, .field select:focus {
+  border-color: var(--gold-dim);
+}
+
+.field input::placeholder { color: var(--text-muted); }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--gold);
+  color: #0a0a08;
+}
+.btn-primary:hover:not(:disabled) { background: var(--gold-bright); }
+
+.btn-ghost {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--border-light);
+  background: var(--bg-card-hover);
+}
+
+.btn-danger {
+  background: var(--red-dim);
+  color: var(--red);
+  border: 1px solid transparent;
+}
+.btn-danger:hover:not(:disabled) { border-color: var(--red); }
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 11px;
+}
+
+/* ── Status badge ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ── Spinner ── */
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 18px;
+  border-radius: var(--radius-lg);
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 1000;
+  animation: fadeUp 200ms ease both;
+  max-width: 360px;
+  border: 1px solid;
+}
+
+.toast-success {
+  background: var(--green-dim);
+  color: var(--green);
+  border-color: rgba(76,175,130,0.3);
+}
+
+.toast-error {
+  background: var(--red-dim);
+  color: var(--red);
+  border-color: rgba(224,82,82,0.3);
+}
+
+/* ── Section layout ── */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.section-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 24px 0;
+}
+
+/* ── Grid ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+/* ── Empty state ── */
+.empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+.empty-icon { font-size: 32px; margin-bottom: 12px; }
+.empty p { font-size: 13px; }

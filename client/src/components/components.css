@@ -1,0 +1,96 @@
+/* ── Employer Dashboard ── */
+.employer-dash { max-width: 1100px; margin: 0 auto; }
+
+.init-section { display: flex; justify-content: center; padding-top: 40px; }
+.init-card { width: 100%; max-width: 520px; }
+.init-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+.init-form { display: flex; flex-direction: column; gap: 16px; }
+
+.demo-note {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 20px;
+  padding: 12px 14px; background: var(--gold-glow);
+  border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius);
+  font-size: 12px; color: var(--text-secondary); line-height: 1.5;
+}
+.demo-note > span { color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+
+.stat-card { position: relative; overflow: hidden; }
+.stat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold)); opacity: 0.5;
+}
+
+.vault-meta-inner { display: flex; align-items: center; gap: 32px; }
+.action-panel { padding-top: 4px; }
+.panel-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-secondary); margin-bottom: 16px;
+}
+.panel-row { display: flex; align-items: flex-end; gap: 12px; }
+
+.recipients-table { padding: 0; overflow: hidden; }
+.recipients-table table { width: 100%; border-collapse: collapse; }
+.recipients-table th {
+  text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.recipients-table td {
+  padding: 14px 16px; font-size: 13px;
+  border-bottom: 1px solid var(--border); vertical-align: middle;
+}
+.recipients-table tr:last-child td { border-bottom: none; }
+.recipients-table tr:hover td { background: var(--bg-card-hover); }
+
+.tr-example {
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px 14px; font-size: 11px;
+}
+.tr-row { display: flex; gap: 16px; padding: 3px 0; }
+.tr-row span:first-child { min-width: 60px; }
+
+/* ── Worker View ── */
+.worker-view { max-width: 900px; margin: 0 auto; }
+
+.blink-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 16px; margin-bottom: 16px;
+}
+.blink-url {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 10px 14px;
+  cursor: pointer; transition: border-color var(--transition);
+  font-size: 12px; overflow: hidden;
+}
+.blink-url:hover { border-color: var(--gold-dim); }
+.blink-label {
+  font-size: 9px; font-weight: 800; letter-spacing: 0.12em; color: var(--gold);
+  background: var(--gold-glow); padding: 2px 6px; border-radius: 3px; flex-shrink: 0;
+}
+.blink-link { color: var(--text-secondary); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.blink-copy { font-size: 10px; color: var(--text-muted); flex-shrink: 0; font-family: 'Syne', sans-serif; font-weight: 600; }
+
+.qr-wrapper { display: flex; flex-direction: column; align-items: center; padding: 24px 0 8px; animation: fadeUp 200ms ease both; }
+
+.blink-flow {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 4px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
+}
+.blink-step { display: flex; align-items: center; gap: 6px; }
+.step-num {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gold-glow); border: 1px solid var(--gold-dim);
+  color: var(--gold); font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-label { font-size: 11px; color: var(--text-secondary); white-space: nowrap; }
+.step-arrow { color: var(--text-muted); font-size: 12px; margin: 0 4px; }
+
+.history-list { display: flex; flex-direction: column; gap: 12px; }
+.history-item { padding: 16px 20px; }
+.history-main { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.history-travel-rule {
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 10px; border-top: 1px solid var(--border);
+}

@@ -1,0 +1,1317 @@
+{
+  "address": "AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF",
+  "metadata": {
+    "name": "payflow_africa",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Programmable stablecoin payroll and remittance for African markets"
+  },
+  "instructions": [
+    {
+      "name": "add_recipient",
+      "docs": [
+        "Compliance officer adds a worker recipient to a vault.",
+        "KYC is set to false by default — must be explicitly verified."
+      ],
+      "discriminator": [
+        207,
+        170,
+        166,
+        28,
+        210,
+        186,
+        242,
+        145
+      ],
+      "accounts": [
+        {
+          "name": "compliance_officer",
+          "docs": [
+            "Only the compliance officer can add recipients."
+          ],
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  114,
+                  111,
+                  108,
+                  108,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.employer",
+                "account": "PayrollVault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "worker_wallet"
+        },
+        {
+          "name": "recipient",
+          "docs": [
+            "RecipientAccount PDA — seeds: [RECIPIENT_SEED, vault, worker_wallet]"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  105,
+                  112,
+                  105,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "worker_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount_per_disbursement",
+          "type": "u64"
+        },
+        {
+          "name": "sender_name",
+          "type": "string"
+        },
+        {
+          "name": "receiver_name",
+          "type": "string"
+        },
+        {
+          "name": "sender_vasp",
+          "type": "string"
+        },
+        {
+          "name": "receiver_vasp",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "blacklist_recipient",
+      "docs": [
+        "Compliance officer permanently blacklists a recipient wallet.",
+        "Irreversible — use with care."
+      ],
+      "discriminator": [
+        224,
+        159,
+        107,
+        159,
+        166,
+        7,
+        231,
+        118
+      ],
+      "accounts": [
+        {
+          "name": "compliance_officer",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  114,
+                  111,
+                  108,
+                  108,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.employer",
+                "account": "PayrollVault"
+              }
+            ]
+          },
+          "relations": [
+            "recipient"
+          ]
+        },
+        {
+          "name": "recipient",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  105,
+                  112,
+                  105,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "recipient.worker_wallet",
+                "account": "RecipientAccount"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "deposit",
+      "docs": [
+        "Employer deposits USDC into their vault."
+      ],
+      "discriminator": [
+        242,
+        35,
+        198,
+        137,
+        82,
+        225,
+        242,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "employer",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  114,
+                  111,
+                  108,
+                  108,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "employer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "employer_token_account",
+          "docs": [
+            "Employer's USDC token account (source of funds)."
+          ],
+          "writable": true
+        },
+        {
+          "name": "vault_token_account",
+          "docs": [
+            "The vault's USDC token account (destination)."
+          ],
+          "writable": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "usdc_mint"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "disburse",
+      "docs": [
+        "Employer or an authorised crank triggers a disbursement.",
+        "Writes an on-chain Travel Rule record as a PDA."
+      ],
+      "discriminator": [
+        68,
+        250,
+        205,
+        89,
+        217,
+        142,
+        13,
+        44
+      ],
+      "accounts": [
+        {
+          "name": "employer",
+          "docs": [
+            "Employer or an authorised crank triggers disbursement."
+          ],
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  114,
+                  111,
+                  108,
+                  108,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "employer"
+              }
+            ]
+          },
+          "relations": [
+            "recipient"
+          ]
+        },
+        {
+          "name": "vault_token_account",
+          "docs": [
+            "Vault's USDC token account — source of funds."
+          ],
+          "writable": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "recipient",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  105,
+                  112,
+                  105,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "recipient.worker_wallet",
+                "account": "RecipientAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "worker_token_account",
+          "docs": [
+            "Worker's USDC token account — destination."
+          ],
+          "writable": true
+        },
+        {
+          "name": "travel_rule_record",
+          "docs": [
+            "Travel Rule record PDA — written once per disbursement, immutable.",
+            "Seeds: [TRAVEL_RULE_SEED, vault, recipient, disbursement_count_as_le_bytes]"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  118,
+                  101,
+                  108,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "recipient"
+              },
+              {
+                "kind": "arg",
+                "path": "disbursement_index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "usdc_mint"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "disbursement_index",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "initialize_vault",
+      "docs": [
+        "Employer creates a payroll vault — one vault per employer."
+      ],
+      "discriminator": [
+        48,
+        191,
+        163,
+        44,
+        71,
+        129,
+        63,
+        164
+      ],
+      "accounts": [
+        {
+          "name": "employer",
+          "docs": [
+            "The employer creating this vault — pays for rent."
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "compliance_officer",
+          "docs": [
+            "Compliance officer — can be the same as employer."
+          ]
+        },
+        {
+          "name": "usdc_mint",
+          "docs": [
+            "The USDC mint. We verify it matches our expected mint in production."
+          ]
+        },
+        {
+          "name": "vault",
+          "docs": [
+            "The vault PDA — seeds: [VAULT_SEED, employer.key()]"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  114,
+                  111,
+                  108,
+                  108,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "employer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault_token_account",
+          "docs": [
+            "The vault's USDC token account — owned by the vault PDA."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "usdc_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vault_name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "remove_recipient",
+      "docs": [
+        "Employer removes a recipient from the vault (closes their PDA)."
+      ],
+      "discriminator": [
+        155,
+        185,
+        10,
+        53,
+        111,
+        57,
+        100,
+        149
+      ],
+      "accounts": [
+        {
+          "name": "compliance_officer",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  114,
+                  111,
+                  108,
+                  108,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.employer",
+                "account": "PayrollVault"
+              }
+            ]
+          },
+          "relations": [
+            "recipient"
+          ]
+        },
+        {
+          "name": "recipient",
+          "docs": [
+            "Closing the account returns rent to compliance_officer."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  105,
+                  112,
+                  105,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "recipient.worker_wallet",
+                "account": "RecipientAccount"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "set_recipient_pause",
+      "docs": [
+        "Compliance officer pauses / unpauses a recipient (soft AML hold)."
+      ],
+      "discriminator": [
+        170,
+        95,
+        83,
+        246,
+        87,
+        79,
+        71,
+        31
+      ],
+      "accounts": [
+        {
+          "name": "compliance_officer",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  114,
+                  111,
+                  108,
+                  108,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.employer",
+                "account": "PayrollVault"
+              }
+            ]
+          },
+          "relations": [
+            "recipient"
+          ]
+        },
+        {
+          "name": "recipient",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  105,
+                  112,
+                  105,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "recipient.worker_wallet",
+                "account": "RecipientAccount"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "paused",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "update_kyc_status",
+      "docs": [
+        "Compliance officer flips the KYC verified flag for a recipient."
+      ],
+      "discriminator": [
+        182,
+        90,
+        72,
+        162,
+        173,
+        39,
+        52,
+        147
+      ],
+      "accounts": [
+        {
+          "name": "compliance_officer",
+          "docs": [
+            "Only compliance officer can update KYC."
+          ],
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  114,
+                  111,
+                  108,
+                  108,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.employer",
+                "account": "PayrollVault"
+              }
+            ]
+          },
+          "relations": [
+            "recipient"
+          ]
+        },
+        {
+          "name": "recipient",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  105,
+                  112,
+                  105,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "recipient.worker_wallet",
+                "account": "RecipientAccount"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "verified",
+          "type": "bool"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "PayrollVault",
+      "discriminator": [
+        225,
+        117,
+        237,
+        47,
+        26,
+        83,
+        200,
+        191
+      ]
+    },
+    {
+      "name": "RecipientAccount",
+      "discriminator": [
+        247,
+        22,
+        7,
+        58,
+        18,
+        64,
+        107,
+        13
+      ]
+    },
+    {
+      "name": "TravelRuleRecord",
+      "discriminator": [
+        2,
+        179,
+        102,
+        25,
+        10,
+        202,
+        48,
+        152
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "KycNotVerified",
+      "msg": "Recipient has not completed KYC verification."
+    },
+    {
+      "code": 6001,
+      "name": "RecipientPaused",
+      "msg": "Recipient wallet is currently paused by compliance."
+    },
+    {
+      "code": 6002,
+      "name": "RecipientBlacklisted",
+      "msg": "Recipient wallet has been permanently blacklisted."
+    },
+    {
+      "code": 6003,
+      "name": "InsufficientVaultBalance",
+      "msg": "Vault has insufficient USDC balance for this disbursement."
+    },
+    {
+      "code": 6004,
+      "name": "UnauthorizedEmployer",
+      "msg": "Only the vault employer can perform this action."
+    },
+    {
+      "code": 6005,
+      "name": "UnauthorizedComplianceOfficer",
+      "msg": "Only the vault's compliance officer can perform this action."
+    },
+    {
+      "code": 6006,
+      "name": "VaultNameTooLong",
+      "msg": "Vault name exceeds the maximum allowed length (50 chars)."
+    },
+    {
+      "code": 6007,
+      "name": "InvalidDisbursementAmount",
+      "msg": "Disbursement amount must be greater than zero."
+    },
+    {
+      "code": 6008,
+      "name": "AlreadyBlacklisted",
+      "msg": "Recipient is already blacklisted — cannot modify."
+    },
+    {
+      "code": 6009,
+      "name": "NameTooLong",
+      "msg": "Name field exceeds maximum allowed length (64 chars)."
+    },
+    {
+      "code": 6010,
+      "name": "VaspTooLong",
+      "msg": "VASP identifier field exceeds maximum allowed length (64 chars)."
+    }
+  ],
+  "types": [
+    {
+      "name": "PayrollVault",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "employer",
+            "docs": [
+              "The employer who owns and controls this vault."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "compliance_officer",
+            "docs": [
+              "Compliance / AML officer — can verify KYC, pause, blacklist.",
+              "Can be the same as employer for small businesses."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "usdc_mint",
+            "docs": [
+              "The SPL token mint this vault accepts (USDC)."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "vault_token_account",
+            "docs": [
+              "The vault's token account — PDA-owned, holds the USDC balance."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "vault_name",
+            "docs": [
+              "Human-readable name for this payroll vault (e.g. \"Acme Kenya Aug 2025\")."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "total_deposited",
+            "docs": [
+              "Total USDC ever deposited (lifetime, not balance)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_disbursed",
+            "docs": [
+              "Total USDC ever disbursed (lifetime)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "recipient_count",
+            "docs": [
+              "Number of active recipients."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RecipientAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this recipient belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "worker_wallet",
+            "docs": [
+              "The worker's Solana wallet that receives USDC."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_per_disbursement",
+            "docs": [
+              "USDC amount to send each disbursement cycle (6 decimals)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "kyc_verified",
+            "docs": [
+              "Set true by compliance_officer after KYC is complete."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "is_paused",
+            "docs": [
+              "Soft AML hold — paused recipients cannot receive funds."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "is_blacklisted",
+            "docs": [
+              "Permanent blacklist — cannot be reversed."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "total_received",
+            "docs": [
+              "Lifetime total received from this vault."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "disbursement_count",
+            "docs": [
+              "Number of disbursements received."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "last_disbursed_at",
+            "docs": [
+              "Timestamp of last disbursement (Unix)."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "sender_name",
+            "docs": [
+              "Legal name of the sending party (employer / business)."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "receiver_name",
+            "docs": [
+              "Legal name of the receiving party (worker full name)."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "sender_vasp",
+            "docs": [
+              "VASP identifier for sender (e.g. \"PayFlow Africa / KE\")."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "receiver_vasp",
+            "docs": [
+              "VASP identifier or mobile money provider for receiver."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TravelRuleRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault that initiated the payment."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient",
+            "docs": [
+              "The recipient account this record is tied to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "worker_wallet",
+            "docs": [
+              "Worker's wallet address."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "docs": [
+              "Amount disbursed in this transaction (USDC, 6 decimals)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "docs": [
+              "Unix timestamp of disbursement."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "disbursement_index",
+            "docs": [
+              "Sequential disbursement number for this recipient."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "sender_name",
+            "docs": [
+              "Originating party legal name."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "receiver_name",
+            "docs": [
+              "Beneficiary legal name."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "sender_vasp",
+            "docs": [
+              "Originating VASP identifier."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "receiver_vasp",
+            "docs": [
+              "Beneficiary VASP identifier."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "The Solana transaction signature (first 32 bytes stored for reference).",
+              "Full sig is always recoverable from chain history."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}
