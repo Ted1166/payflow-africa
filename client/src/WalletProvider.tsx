@@ -7,7 +7,7 @@ import '@solana/wallet-adapter-react-ui/styles.css';
 interface Props { children: React.ReactNode; }
 
 export default function WalletContextProvider({ children }: Props) {
-  const endpoint = 'https://rpc.ankr.com/solana_devnet';
+  const endpoint = 'https://api.devnet.solana.com';
   const wallets = useMemo(() => [
     new PhantomWalletAdapter(),
     new SolflareWalletAdapter(),
