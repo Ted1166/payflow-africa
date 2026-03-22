@@ -1,20 +1,16 @@
-// Simple visual QR placeholder — replace with qrcode.react in production
 interface QRCodeProps {
   value: string;
   size?: number;
 }
 
 export default function QRCode({ value, size = 160 }: QRCodeProps) {
-  // Generate a deterministic grid pattern from the URL for visual demo
   const hash = value.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
   const cells = 21;
   const cellSize = Math.floor(size / cells);
   
   const grid: boolean[][] = Array.from({ length: cells }, (_, r) =>
     Array.from({ length: cells }, (_, c) => {
-      // Always fill corners (finder patterns)
       if ((r < 7 && c < 7) || (r < 7 && c >= cells - 7) || (r >= cells - 7 && c < 7)) return true;
-      // Pseudo-random fill based on URL hash
       return ((r * cells + c + hash + r * c) % 3) !== 0;
     })
   );

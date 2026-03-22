@@ -12,7 +12,7 @@ pub fn handler(ctx: Context<BlacklistRecipient>) -> Result<()> {
 
     let recipient = &mut ctx.accounts.recipient;
     recipient.is_blacklisted = true;
-    recipient.is_paused = true; // implicitly paused too
+    recipient.is_paused = true;
 
     msg!(
         "Recipient {} has been PERMANENTLY BLACKLISTED on vault {}.",

@@ -46,13 +46,11 @@ export default function WorkerView() {
       const employerPK = new PublicKey(employerInput.trim());
       const [vaultPDA] = findVaultPDA(employerPK);
 
-      // Check vault exists
       const vault = await prog.fetchVault(vaultPDA);
       if (!vault) { notify('No vault found for this employer', 'error'); return; }
 
       setResolvedVault(vaultPDA.toString());
 
-      // Fetch recipient account
       const [recipientPDA] = findRecipientPDA(vaultPDA, publicKey);
       const recipient = await prog.fetchRecipient(recipientPDA);
 
@@ -61,7 +59,6 @@ export default function WorkerView() {
         setRecipientInfo(null); setHistory([]); return;
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const r = recipient as any;
       setRecipientInfo({
         kycVerified: r.kycVerified,
@@ -72,7 +69,6 @@ export default function WorkerView() {
       });
       notify(`Found — ${r.disbursementCount} disbursement(s) on record`);
 
-      // Fetch travel rule records
       const entries: TravelRuleEntry[] = [];
       for (let i = 0; i < r.disbursementCount; i++) {
         try {
@@ -80,7 +76,6 @@ export default function WorkerView() {
           const [trPDA] = ftr(vaultPDA, recipientPDA, i);
           const tr = await prog.fetchTravelRule(trPDA);
           if (!tr) continue;
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const t = tr as any;
           entries.push({
             index: i,
@@ -94,7 +89,7 @@ export default function WorkerView() {
           });
         } catch { /* no record for this index */ }
       }
-      setHistory(entries.reverse()); // newest first
+      setHistory(entries.reverse());
     } catch (e) {
       notify(e instanceof Error ? e.message : 'Invalid employer address', 'error');
     } finally {

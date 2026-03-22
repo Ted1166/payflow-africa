@@ -11,9 +11,7 @@ import {
 } from "@solana/spl-token";
 import { assert } from "chai";
 
-// ---------------------------------------------------------------------------
-// Seeds — must match program constants exactly
-// ---------------------------------------------------------------------------
+
 const VAULT_SEED = Buffer.from("payroll_vault");
 const RECIPIENT_SEED = Buffer.from("recipient");
 const TRAVEL_RULE_SEED = Buffer.from("travel_rule");
@@ -37,14 +35,13 @@ function findTravelRulePDA(vault: PublicKey, recipient: PublicKey, index: number
   return PublicKey.findProgramAddressSync([TRAVEL_RULE_SEED, vault.toBuffer(), recipient.toBuffer(), buf], programId);
 }
 
-// ---------------------------------------------------------------------------
 describe("payflow-africa", () => {
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
   const program = anchor.workspace.PayflowAfrica as Program<PayflowAfrica>;
   const connection = provider.connection;
 
-  // Use provider wallet as employer — already funded, no airdrop needed
+
   const employer = (provider.wallet as anchor.Wallet).payer;
   const complianceOfficer = Keypair.generate();
   const worker1 = Keypair.generate();
@@ -57,11 +54,9 @@ describe("payflow-africa", () => {
   let worker1TokenAccount: PublicKey;
   let vaultTokenAccount: PublicKey;
 
-  // ---------------------------------------------------------------------------
   before(async () => {
     console.log("\n=== Setting up test environment ===");
 
-    // Only airdrop to 2 keypairs to avoid rate limit
     for (const kp of [complianceOfficer, worker1]) {
       const tx = new anchor.web3.Transaction().add(
         anchor.web3.SystemProgram.transfer({
@@ -73,20 +68,16 @@ describe("payflow-africa", () => {
       await provider.sendAndConfirm(tx, [employer]);
     }
 
-    // Create USDC mock mint
     usdcMint = await createMint(connection, employer, employer.publicKey, null, USDC_DECIMALS);
 
-    // Employer token account + mint 10,000 USDC
     employerTokenAccount = await createAssociatedTokenAccount(connection, employer, usdcMint, employer.publicKey);
     await mintTo(connection, employer, usdcMint, employerTokenAccount, employer, uiToRaw(10_000).toNumber());
 
-    // Derive PDAs
     [vaultPDA] = findVaultPDA(employer.publicKey, program.programId);
     [recipient1PDA] = findRecipientPDA(vaultPDA, worker1.publicKey, program.programId);
 
     vaultTokenAccount = await anchor.utils.token.associatedAddress({ mint: usdcMint, owner: vaultPDA });
 
-    // Worker1 token account — worker1 pays for its own ATA
     worker1TokenAccount = await createAssociatedTokenAccount(connection, worker1, usdcMint, worker1.publicKey);
 
     console.log("Employer:", employer.publicKey.toBase58());

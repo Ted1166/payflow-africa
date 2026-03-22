@@ -36,18 +36,11 @@ pub fn handler(ctx: Context<InitializeVault>, vault_name: String) -> Result<()> 
 #[derive(Accounts)]
 #[instruction(vault_name: String)]
 pub struct InitializeVault<'info> {
-    /// The employer creating this vault — pays for rent.
     #[account(mut)]
     pub employer: Signer<'info>,
-
-    /// Compliance officer — can be the same as employer.
-    /// CHECK: Just storing the pubkey; no signing required at init.
     pub compliance_officer: UncheckedAccount<'info>,
-
-    /// The USDC mint. We verify it matches our expected mint in production.
     pub usdc_mint: Account<'info, Mint>,
 
-    /// The vault PDA — seeds: [VAULT_SEED, employer.key()]
     #[account(
         init,
         payer = employer,
@@ -57,7 +50,6 @@ pub struct InitializeVault<'info> {
     )]
     pub vault: Account<'info, PayrollVault>,
 
-    /// The vault's USDC token account — owned by the vault PDA.
     #[account(
         init,
         payer = employer,

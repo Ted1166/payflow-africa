@@ -5,7 +5,6 @@ use crate::errors::PayFlowError;
 use crate::state::{PayrollVault, RecipientAccount};
 
 pub fn handler(ctx: Context<UpdateKycStatus>, verified: bool) -> Result<()> {
-    // Cannot modify a blacklisted recipient at all
     require!(
         !ctx.accounts.recipient.is_blacklisted,
         PayFlowError::AlreadyBlacklisted
@@ -27,7 +26,6 @@ pub fn handler(ctx: Context<UpdateKycStatus>, verified: bool) -> Result<()> {
 
 #[derive(Accounts)]
 pub struct UpdateKycStatus<'info> {
-    /// Only compliance officer can update KYC.
     pub compliance_officer: Signer<'info>,
 
     #[account(

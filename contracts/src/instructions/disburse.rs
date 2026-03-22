@@ -8,7 +8,6 @@ use crate::state::{PayrollVault, RecipientAccount, TravelRuleRecord};
 pub fn handler(ctx: Context<Disburse>, disbursement_index: u32) -> Result<()> {
     let recipient = &ctx.accounts.recipient;
 
-    // --- Compliance gate ---
     require!(!recipient.is_blacklisted, PayFlowError::RecipientBlacklisted);
     require!(!recipient.is_paused, PayFlowError::RecipientPaused);
     require!(recipient.kyc_verified, PayFlowError::KycNotVerified);
@@ -18,17 +17,14 @@ pub fn handler(ctx: Context<Disburse>, disbursement_index: u32) -> Result<()> {
 
     require!(
         disbursement_index == ctx.accounts.recipient.disbursement_count,
-        PayFlowError::InvalidDisbursementAmount // reuse this or add a new error
+        PayFlowError::InvalidDisbursementAmount
     );
 
-    // Check vault has enough balance
     require!(
         ctx.accounts.vault_token_account.amount >= amount,
         PayFlowError::InsufficientVaultBalance
     );
 
-    // --- Transfer USDC from vault → worker's token account ---
-    // The vault PDA signs via CPI seeds
     let employer_key = ctx.accounts.vault.employer;
     let vault_seeds: &[&[u8]] = &[
         VAULT_SEED,
@@ -49,11 +45,9 @@ pub fn handler(ctx: Context<Disburse>, disbursement_index: u32) -> Result<()> {
     );
     token::transfer(cpi_ctx, amount)?;
 
-    // --- Update vault totals ---
     let vault = &mut ctx.accounts.vault;
     vault.total_disbursed = vault.total_disbursed.saturating_add(amount);
 
-    // --- Update recipient state ---
     let recipient_key = ctx.accounts.recipient.key();
     let worker_wallet = ctx.accounts.recipient.worker_wallet;
 
@@ -63,7 +57,6 @@ pub fn handler(ctx: Context<Disburse>, disbursement_index: u32) -> Result<()> {
     recipient.disbursement_count = recipient.disbursement_count.saturating_add(1);
     recipient.last_disbursed_at = Clock::get()?.unix_timestamp;
 
-    // --- Write Travel Rule record ---
     let travel_rule = &mut ctx.accounts.travel_rule_record;
     travel_rule.vault = ctx.accounts.vault.key();
     travel_rule.recipient = recipient_key;
@@ -77,7 +70,6 @@ pub fn handler(ctx: Context<Disburse>, disbursement_index: u32) -> Result<()> {
     travel_rule.receiver_vasp = recipient.receiver_vasp.clone();
     travel_rule.bump = ctx.bumps.travel_rule_record;
 
-    // Log whether this triggered Travel Rule reporting threshold
     if amount >= TRAVEL_RULE_THRESHOLD {
         msg!(
             "[TRAVEL RULE] Disbursement #{} — {} USDC (raw) from '{}' ({}) to '{}' ({}) at wallet {}",
@@ -105,7 +97,6 @@ pub fn handler(ctx: Context<Disburse>, disbursement_index: u32) -> Result<()> {
 #[instruction(disbursement_index: u32)]
 pub struct Disburse<'info> {
     #[account(mut)]
-    /// Employer or an authorised crank triggers disbursement.
     pub employer: Signer<'info>,
 
     #[account(
@@ -117,7 +108,6 @@ pub struct Disburse<'info> {
     )]
     pub vault: Account<'info, PayrollVault>,
 
-    /// Vault's USDC token account — source of funds.
     #[account(
         mut,
         token::mint = usdc_mint,
@@ -133,7 +123,6 @@ pub struct Disburse<'info> {
     )]
     pub recipient: Account<'info, RecipientAccount>,
 
-    /// Worker's USDC token account — destination.
     #[account(
         mut,
         token::mint = usdc_mint,
@@ -141,8 +130,6 @@ pub struct Disburse<'info> {
     )]
     pub worker_token_account: Box<Account<'info, TokenAccount>>,
 
-    /// Travel Rule record PDA — written once per disbursement, immutable.
-    /// Seeds: [TRAVEL_RULE_SEED, vault, recipient, disbursement_count_as_le_bytes]
     #[account(
         init,
         payer = employer,

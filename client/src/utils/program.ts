@@ -3,7 +3,6 @@ import BN from 'bn.js';
 
 export const PROGRAM_ID = new PublicKey('AMY97PPq8avNiNsEWsNiyMHZjfydLomUvzwKsWp4VJrF');
 
-// Seeds — must match program exactly
 export const VAULT_SEED = Buffer.from('payroll_vault');
 export const RECIPIENT_SEED = Buffer.from('recipient');
 export const TRAVEL_RULE_SEED = Buffer.from('travel_rule');

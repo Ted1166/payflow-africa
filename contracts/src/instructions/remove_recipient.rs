@@ -5,7 +5,6 @@ use crate::errors::PayFlowError;
 use crate::state::{PayrollVault, RecipientAccount};
 
 pub fn handler(ctx: Context<RemoveRecipient>) -> Result<()> {
-    // Decrement vault recipient counter
     ctx.accounts.vault.recipient_count = ctx.accounts.vault
         .recipient_count
         .saturating_sub(1);
@@ -34,7 +33,6 @@ pub struct RemoveRecipient<'info> {
     )]
     pub vault: Account<'info, PayrollVault>,
 
-    /// Closing the account returns rent to compliance_officer.
     #[account(
         mut,
         seeds = [RECIPIENT_SEED, vault.key().as_ref(), recipient.worker_wallet.as_ref()],

@@ -8,7 +8,6 @@ use crate::state::PayrollVault;
 pub fn handler(ctx: Context<Deposit>, amount: u64) -> Result<()> {
     require!(amount > 0, PayFlowError::InvalidDisbursementAmount);
 
-    // Transfer USDC from employer's token account → vault token account
     let cpi_accounts = Transfer {
         from: ctx.accounts.employer_token_account.to_account_info(),
         to: ctx.accounts.vault_token_account.to_account_info(),
@@ -17,7 +16,6 @@ pub fn handler(ctx: Context<Deposit>, amount: u64) -> Result<()> {
     let cpi_ctx = CpiContext::new(ctx.accounts.token_program.to_account_info(), cpi_accounts);
     token::transfer(cpi_ctx, amount)?;
 
-    // Update vault totals
     let vault = &mut ctx.accounts.vault;
     vault.total_deposited = vault.total_deposited.saturating_add(amount);
 
@@ -45,7 +43,6 @@ pub struct Deposit<'info> {
     )]
     pub vault: Account<'info, PayrollVault>,
 
-    /// Employer's USDC token account (source of funds).
     #[account(
         mut,
         token::mint = usdc_mint,
@@ -53,7 +50,6 @@ pub struct Deposit<'info> {
     )]
     pub employer_token_account: Account<'info, TokenAccount>,
 
-    /// The vault's USDC token account (destination).
     #[account(
         mut,
         token::mint = usdc_mint,

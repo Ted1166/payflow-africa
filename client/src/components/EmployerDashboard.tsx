@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { getAssociatedTokenAddress } from '@solana/spl-token';
@@ -41,46 +41,60 @@ export default function EmployerDashboard() {
 
   const notify = (msg: string, type: 'success' | 'error' = 'success') => { setToast({ message: msg, type }); setTimeout(() => setToast(null), 5000); };
 
+  const refreshing = useRef(false);
+
+  const progRef = useRef(prog);
+  progRef.current = prog;
+
   const refresh = useCallback(async () => {
-    if (!wallet.publicKey) return;
-    const [vaultPDA] = findVaultPDA(wallet.publicKey);
-    const v = await prog.fetchVault(vaultPDA);
-    setVault(v ? v as unknown as VaultAccount : null);
-    if (!v) { setRecipients([]); return; }
+    if (!wallet.publicKey || refreshing.current) return;
+    refreshing.current = true;
+    try {
+      const p = progRef.current;
+      const [vaultPDA] = findVaultPDA(wallet.publicKey);
+      const v = await p.fetchVault(vaultPDA);
+      setVault(v ? v as unknown as VaultAccount : null);
+      if (!v) { setRecipients([]); return; }
 
-    const accounts = await connection.getProgramAccounts(PROGRAM_ID, {
-      filters: [
-        { dataSize: 189 },
-        { memcmp: { offset: 8, bytes: vaultPDA.toBase58() } },
-      ],
-    });
+      const allAccounts = await connection.getProgramAccounts(PROGRAM_ID, {
+        filters: [
+          { memcmp: { offset: 8, bytes: vaultPDA.toBase58() } },
+        ],
+      });
 
-    const parsed: RecipientAccount[] = accounts.flatMap(({ pubkey, account }) => {
-      const d = account.data;
-      let o = 8;
-      o += 32;
-      const workerWallet = new PublicKey(d.slice(o, o + 32)); o += 32;
-      const amountPerDisbursement = new BN(d.slice(o, o + 8), 'le'); o += 8;
-      const kycVerified = d[o] === 1; o += 1;
-      const isPaused = d[o] === 1; o += 1;
-      const isBlacklisted = d[o] === 1; o += 1;
-      const totalReceived = new BN(d.slice(o, o + 8), 'le'); o += 8;
-      const disbursementCount = d.readUInt32LE(o); o += 4;
-      o += 8;
-      const snLen = d.readUInt32LE(o); o += 4;
-      const senderName = d.slice(o, o + snLen).toString('utf8'); o += snLen;
-      const rnLen = d.readUInt32LE(o); o += 4;
-      const receiverName = d.slice(o, o + rnLen).toString('utf8'); o += rnLen;
-      const svLen = d.readUInt32LE(o); o += 4;
-      const senderVasp = d.slice(o, o + svLen).toString('utf8'); o += svLen;
-      const rvLen = d.readUInt32LE(o); o += 4;
-      const receiverVasp = d.slice(o, o + rvLen).toString('utf8'); o += rvLen;
+      const parsed: RecipientAccount[] = allAccounts.flatMap(({ pubkey, account }) => {
+        try {
+          const d = account.data;
+          if (d.length < 100) return [];
+          let o = 8;
+          o += 32; // vault pubkey
+          const workerWallet = new PublicKey(d.slice(o, o + 32)); o += 32;
+          const amountPerDisbursement = new BN(d.slice(o, o + 8), 'le'); o += 8;
+          const kycVerified = d[o] === 1; o += 1;
+          const isPaused = d[o] === 1; o += 1;
+          const isBlacklisted = d[o] === 1; o += 1;
+          const totalReceived = new BN(d.slice(o, o + 8), 'le'); o += 8;
+          const disbursementCount = d.readUInt32LE(o); o += 4;
+          o += 8; // lastDisbursedAt
+          const snLen = d.readUInt32LE(o); o += 4;
+          const senderName = d.slice(o, o + snLen).toString('utf8'); o += snLen;
+          const rnLen = d.readUInt32LE(o); o += 4;
+          const receiverName = d.slice(o, o + rnLen).toString('utf8'); o += rnLen;
+          const svLen = d.readUInt32LE(o); o += 4;
+          const senderVasp = d.slice(o, o + svLen).toString('utf8'); o += svLen;
+          const rvLen = d.readUInt32LE(o); o += 4;
+          const receiverVasp = d.slice(o, o + rvLen).toString('utf8'); o += rvLen;
+          return [{ pda: pubkey, workerWallet, senderName, receiverName, senderVasp, receiverVasp, amountPerDisbursement, kycVerified, isPaused, isBlacklisted, totalReceived, disbursementCount }];
+        } catch { return []; }
+      });
 
-      return { pda: pubkey, workerWallet, senderName, receiverName, senderVasp, receiverVasp, amountPerDisbursement, kycVerified, isPaused, isBlacklisted, totalReceived, disbursementCount };
-    });
-
-    setRecipients(parsed);
-  }, [wallet.publicKey, prog, connection]);
+      setRecipients(parsed);
+    } catch (e) {
+      console.error('refresh error:', e);
+    } finally {
+      refreshing.current = false;
+    }
+  }, [wallet.publicKey, connection]);
 
   useEffect(() => { refresh(); }, [refresh]);
 
